@@ -3,8 +3,10 @@ local LuaMem = 0
 local NewMemory = 0
 
 local blink_gc_memory = CreateClientConVar("blink_gc_memory", "768432", true, false, "Sets the amount of KB! before manually running a garbage collection.")
-local blink_gc_enable = CreateClientConVar("blink_gc_enable", "1", true, false, "Activates Blink's Garbage Collection.")
+local blink_gc_enable = CreateClientConVar("blink_gc_enable", "1", true, false, "Activates Blink's Garbage Collection, if loaded disable, it will not load the rest of the script.")
 local blink_gc_print = CreateClientConVar("blink_gc_print", "0", true, false, "Shows you your active memory being used in console.")
+
+if not(blink_gc_enable:GetBool()) then return end -- if it's disabled, dont load the rest on launch
 
 local function EasyPrint(message)
 	if not(blink_gc_print:GetBool()) then return end
