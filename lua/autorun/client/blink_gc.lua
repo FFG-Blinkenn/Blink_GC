@@ -11,7 +11,7 @@ local function EasyPrint(message)
 	
 	MsgC(Color(115, 148, 248), message.."\n")
 end
-EasyPrint("Active Lua Memory : ".. math.Round(collectgarbage("count")/1024).. " MBytes.")
+--EasyPrint("Active Lua Memory : ".. math.Round(collectgarbage("count")/1024).. " MBytes.")
 
 local function ClearLuaMemory()
 	if not(blink_gc_enable:GetBool()) then return end
@@ -24,9 +24,9 @@ local function ClearLuaMemory()
 		EasyPrint("Removed ".. math.Round((LuaMem - NewMemory)/1024).. " MB from active memory.")
 	end
 end
-timer.Remove("Aggro_Lua_GC") -- For refreshing
+--timer.Remove("Aggro_Lua_GC") -- For refreshing
 timer.Create("Aggro_Lua_GC", 60, 0, function() ClearLuaMemory() end)
-ClearLuaMemory()
+--ClearLuaMemory()
 
 local function PrintCurrentLuaMemory()
 	local LuaMem = collectgarbage("count")
