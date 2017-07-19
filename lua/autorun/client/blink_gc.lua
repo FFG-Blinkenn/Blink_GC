@@ -4,12 +4,12 @@ local NewMemory = 0
 
 local blink_gc_memory = CreateClientConVar("blink_gc_memory", "768432", true, false, "Sets the amount of KB! before manually running a garbage collection.")
 local blink_gc_enable = CreateClientConVar("blink_gc_enable", "1", true, false, "Activates Blink's Garbage Collection.")
-local blink_gc_print = CreateClientConVar("blink_gc_print", "1", true, false, "Shows you your active memory being used in console.")
+local blink_gc_print = CreateClientConVar("blink_gc_print", "0", true, false, "Shows you your active memory being used in console.")
 
 local function EasyPrint(message)
 	if not(blink_gc_print:GetBool()) then return end
 	
-	MsgC(Color(115, 148, 248), message.."\n")
+	MsgC(Color(115, 148, 248), message.. "\n")
 end
 --EasyPrint("Active Lua Memory : ".. math.Round(collectgarbage("count")/1024).. " MBytes.")
 
@@ -30,6 +30,6 @@ timer.Create("Aggro_Lua_GC", 60, 0, function() ClearLuaMemory() end)
 
 local function PrintCurrentLuaMemory()
 	local LuaMem = collectgarbage("count")
-	ply:ConCommand("say Active Lua Memory : ".. math.Round(LuaMem/1024).. " MB.")
+	MsgC(Color(155, 148, 248), "Active Lua Memory : ".. math.Round(LuaMem/1024).. " MB.")
 end
 concommand.Add("blink_gc_luamemory", function() PrintCurrentLuaMemory() end)
